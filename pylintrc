@@ -1,0 +1,11 @@
+[MESSAGES CONTROL]
+disable=
+	missing-module-docstring,
+	missing-class-docstring,
+	missing-function-docstring,
+	no-member,
+	invalid-name,
+
+
+[FORMAT]
+max-line-length=240
