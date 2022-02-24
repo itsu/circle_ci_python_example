@@ -6,7 +6,7 @@ disable=
 	no-member,
 	invalid-name,
 	invalid-str-returned,
-
+	redefined-builtin
 
 [FORMAT]
 max-line-length=240
