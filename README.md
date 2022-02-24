@@ -101,7 +101,9 @@ DATABASES = {
     }
 }
 ```
-Now rerun the build and it should pass. There's a lot more we can do, including saving our test results, but for now, let's commit these changes. Now circleci will listen for changes to your repo. It will run a new build whenever you push a new branch, push changes to a branch or merge to main. You'll be able to see the status of the build on your PR. 
+Now rerun the build and it should pass. There's a lot more we can do, including saving our test results, but for now, let's commit these changes. Now circleci will listen for changes to your repo. It will run a new build whenever you push a new branch, push changes to a branch or merge to main. You'll be able to see the status of the build on your PR.
+
+Let's go back and add a step to run our linter before our tests. 
 
 what
 Create a Django application
