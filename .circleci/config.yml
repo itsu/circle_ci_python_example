@@ -9,7 +9,8 @@ jobs:
           DATABASE_URL: postgresql://root@localhost/circle_test?sslmode=disable
       - image: cimg/postgres:14.1
         environment:
-          POSTGRES_USER: root
+          POSTGRES_USER: example
+          POSTGRES_PASSWORD: 1234
           POSTGRES_DB: circle_test
     steps:
       - checkout
