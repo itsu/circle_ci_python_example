@@ -11,8 +11,8 @@ jobs:
     steps:
       - checkout
       - run:
-          name: debug
-          command: pwd
+          name: lint
+          command: pylint my_media/ media_organizer/
       - run:
           name: install dependancies
           command: pip install -r requirements.txt
