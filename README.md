@@ -102,7 +102,7 @@ DATABASES = {
 }
 ```
 Now rerun the build and it should pass. There's a lot more we can do, including saving our test results, but for now, let's commit these changes.
-TO DO
+
 
 Create a Django application
 attach it to a postgresql db
