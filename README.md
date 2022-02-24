@@ -1,3 +1,7 @@
+Go to circleci and start a new account. You can sign up with your email or use an existing github account. Follow the steps to connect your github or bitbucket account. I used github.
+
+Once you are signed in Click projects in the menu on the left. You should see a list of repos.
+
 TO DO
 
 Create a Django application
