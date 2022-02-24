@@ -78,6 +78,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'my_media',
+        'USER': 'example',
+        'PASSWORD': '1234',
         'HOST': 'localhost',
     }
 }
