@@ -103,7 +103,22 @@ DATABASES = {
 ```
 Now rerun the build and it should pass. There's a lot more we can do, including saving our test results, but for now, let's commit these changes. Now circleci will listen for changes to your repo. It will run a new build whenever you push a new branch, push changes to a branch or merge to main. You'll be able to see the status of the build on your PR.
 
-Let's go back and add a step to run our linter before our tests. 
+Let's go back and add a step to run our linter before our tests.
+
+```yml
+    steps:
+      - checkout
+      - run:
+          name: install dependancies
+          command: pip install -r requirements.txt
+      - run:
+          name: lint
+          command: pylint my_media/ media_organizer/
+      - run:
+          name: run tests
+          command: python manage.py test
+```
+Each time we make an update to our yml file, Circleci will ask if we want to commit to an existing branch or create a new one. In this case I created a new branch.
 
 what
 Create a Django application
@@ -135,5 +150,8 @@ From here we can build the yml through trial and error.
 It will need to:
   lint - run the linter and pass
   test - install postgres, run migrations, run tests
+
+  add the store_test_results step
+
   build a docker image - so probably need to create a dockerfile?
   push the image to docker hub - never done this.
