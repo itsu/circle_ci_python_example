@@ -11,14 +11,16 @@ jobs:
     steps:
       - checkout
       - run:
-          name: debug
-          command: pwd
-      - run:
           name: install dependancies
           command: pip install -r requirements.txt
       - run:
+          name: lint
+          command: pylint my_media/ media_organizer/
+      - run:
           name: run tests
           command: python manage.py test
+      - store_test_results:
+          path: test_results
 
 workflows:
   build-and-test-workflow:

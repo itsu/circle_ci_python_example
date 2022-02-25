@@ -27,6 +27,11 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+# XML test runner
+TEST_RUNNER = 'xmlrunner.extra.djangotestrunner.XMLTestRunner'
+TEST_OUTPUT_DIR = './test_results'
+TEST_OUTPUT_FILE_NAME = 'results.xml'
+
 
 # Application definition
 
