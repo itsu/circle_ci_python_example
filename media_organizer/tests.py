@@ -19,7 +19,7 @@ class MoviesTestCase(TestCase):
         self.assertIsInstance(self.movie_two.name, str)
 
     def test_str_returns_all_formats(self):
-        self.assertIn('xxx', f'{self.movie_one}')
+        self.assertIn('DVD', f'{self.movie_one}')
         self.assertIn('BD', f'{self.movie_one}')
         self.assertIn('DVD', f'{self.movie_two}')
 
