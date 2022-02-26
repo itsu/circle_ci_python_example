@@ -22,18 +22,18 @@ jobs:
       - store_test_results:
           path: test_results
   build-and-push-to-docker-hub:
-    build:
+    machine: true
     steps:
       - setup_remote_docker:
           version: 19.03.13
       - checkout
       - run: |
-         echo "$DOCKER_PASS" | docker login --username $DOCKER_USER --password-stdin
-     # build the application image
-     - run: docker build -t circle_ci_python_example:$CIRCLE_BRANCH .
+          echo "$DOCKER_PASS" | docker login --username $DOCKER_USER --password-stdin
+      # build the application image
+      - run: docker build -t circle_ci_python_example:$CIRCLE_BRANCH .
 
      # deploy the image
-     - run: docker push circle_ci_python_example:$CIRCLE_BRANCH
+      - run: docker push circle_ci_python_example:$CIRCLE_BRANCH
 
 workflows:
   build-and-test-workflow:
