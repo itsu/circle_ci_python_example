@@ -22,11 +22,13 @@ jobs:
       - store_test_results:
           path: test_results
   build-and-push-to-docker-hub:
-    machine: true
+    docker:
+      - image: cimg/python:3.10.1
     steps:
+      - checkout
       - setup_remote_docker:
           version: 19.03.13
-      - checkout
+          docker_layer_caching: true
       - run: |
           echo "$DOCKER_PASS" | docker login --username $DOCKER_USER --password-stdin
       # build the application image
