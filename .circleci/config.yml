@@ -30,7 +30,7 @@ jobs:
           version: 19.03.13
           docker_layer_caching: true
       - run: |
-          echo "$DOCKER_PASS" | docker login --username $DOCKER_USER --password-stdin
+          echo "$DOCKERHUB_PASSWORD" | docker login --username $DOCKERHUB_USERNAME --password-stdin
       # build the application image
       - run: docker build -t circle_ci_python_example:$CIRCLE_BRANCH .
 
