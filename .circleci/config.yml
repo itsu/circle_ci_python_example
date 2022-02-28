@@ -21,7 +21,7 @@ jobs:
           command: python manage.py test
       - store_test_results:
           path: test_results
-  build-and-push-to-docker-hub:
+  build-and-push-to-dockerhub:
     docker:
       - image: cimg/python:3.10.1
     steps:
@@ -41,6 +41,6 @@ workflows:
   build-and-test-workflow:
     jobs:
       - test-and-lint
-      - build-and-push-to-docker-hub:
+      - build-and-push-to-dockerhub:
           requires:
             - test-and-lint
