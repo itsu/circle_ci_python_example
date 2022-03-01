@@ -33,7 +33,6 @@ jobs:
           echo "$DOCKERHUB_PASSWORD" | docker login --username $DOCKERHUB_USERNAME --password-stdin
       # build the application image
       - run: docker build -t jalletto/circle_ci_python_example:$CIRCLE_BRANCH .
-
      # deploy the image
       - run: docker push jalletto/circle_ci_python_example:$CIRCLE_BRANCH
 
