@@ -15,8 +15,10 @@ The idea behind this project is an app to help keep track of physical media, but
 
 1. Create a virtual env and activate it.
 
-`python -m venv venv`
-`source venv/bin/activate`
+```bash
+python -m venv venv
+source venv/bin/activate
+```
 
 2. Install the Dependencies.
 
