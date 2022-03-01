@@ -33,7 +33,7 @@ The idea behind this project is an app to help keep track of physical media, but
 `python manage.py migrate`
 
 ## The Tests
-There a few unit tests that can be run with:
+There are a few unit tests that can be run with:
 
 `python mangae.py test`
 

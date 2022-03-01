@@ -3,23 +3,9 @@ version: "3.9"
 services:
   db:
     image: postgres
-    volumes:
-      - ./data/db:/var/lib/postgresql/data
     environment:
       - POSTGRES_NAME=my_media
       - POSTGRES_USER=example
-      - POSTGRES_PASSWORD=1234
-  web:
-    build: .
-    command: python manage.py migrate
-    command: python manage.py runserver 0.0.0.0:8000
-    volumes:
-      - .:/circle_ci_python_example-web-1
+      - POSTGRES_HOST_AUTH_METHOD=trust
     ports:
-      - "8000:8000"
-    # environment:
-    #   - POSTGRES_NAME=postgres
-    #   - POSTGRES_USER=postgres
-    #   - POSTGRES_PASSWORD=postgres
-    depends_on:
-      - db
+      - 5432:5432
