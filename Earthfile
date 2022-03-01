@@ -21,7 +21,7 @@ test:
   SAVE ARTIFACT test_results/results.xml test_results/results.xml AS LOCAL ./test_results/results.xml
 
 
-docker-push:
+docker:
   FROM +build
   ENTRYPOINT ["python", "manage.py"," runserver", "0.0.0.0:8000"]
-  SAVE IMAGE jalletto/circle_ci_python_example
+  SAVE IMAGE --push jalletto/circle_ci_python_example

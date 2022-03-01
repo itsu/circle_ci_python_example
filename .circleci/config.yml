@@ -12,4 +12,4 @@ jobs:
       # - run: earthly +test
       # - store_test_results:
       #     path: test_results
-      - run: earthly --ci --push +docker-push
+      - run: earthly --ci --push +docker
