@@ -9,7 +9,7 @@ jobs:
       - run: "sudo /bin/sh -c 'wget https://github.com/earthly/earthly/releases/download/v0.6.8/earthly-linux-amd64 -O /usr/local/bin/earthly && chmod +x /usr/local/bin/earthly'"
       - run: earthly --version
       - run: earthly +lint
-      # - run: earthly +test
-      # - store_test_results:
-      #     path: test_results
+      - run: earthly +test
+      - store_test_results:
+          path: test_results
       - run: earthly --ci --push +docker
