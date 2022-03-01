@@ -25,10 +25,11 @@ source venv/bin/activate
 `pip install -r requirements.txt`
 
 3. Create a database and a database user.
-
-`createdb my_media`
-`psql my_media`
-`my_media=# CREATE ROLE example WITH LOGIN CREATEDB PASSWORD '1234';`
+```bash
+createdb my_media
+psql my_media
+my_media=# CREATE ROLE example WITH LOGIN CREATEDB PASSWORD '1234';
+```
 
 4. Run the migrations.
 
