@@ -5,16 +5,14 @@ services:
     image: postgres
     environment:
       - POSTGRES_NAME=my_media
-      - POSTGRES_USER=my_media
+      - POSTGRES_USER=example
       - POSTGRES_HOST_AUTH_METHOD=trust
     ports:
       - 5432:5432
-  # web:
-  #   image: test:lates
-  #   command: python manage.py runserver 0.0.0.0:8000
-  #   ports:
-  #     - "8000:8000"
-  #   depends_on:
-  #     - db
-
-
+  web:
+    build: .
+    command: python manage.py runserver 0.0.0.0:8000
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
