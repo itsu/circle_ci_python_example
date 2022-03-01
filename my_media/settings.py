@@ -85,7 +85,7 @@ DATABASES = {
         'NAME': 'my_media',
         'USER': 'example',
         'PASSWORD': '1234',
-        'HOST': 'db',
+        'HOST': 'localhost',
         'PORT' : 5432,
     }
 }

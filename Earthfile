@@ -2,29 +2,26 @@ VERSION 0.6
 FROM python:3
 WORKDIR /circle_ci_python_example
 
-test-and-lint:
-  COPY . .
-  COPY docker-compose.yml ./ 
-  WITH DOCKER 
-      DOCKER PULL postgres:14.1
-      DOCKER PULL python:latest
-      RUN docker-compose up -d 
-  END
-
 build:
-	COPY . /circle_ci_python_example
+  COPY ./requirements.txt .
   RUN pip install -r requirements.txt
-  COPY . /circle_ci_python_example/
-	SAVE ARTIFACT circle_ci_python_example AS LOCAL circle_ci_python_example
+  COPY . .
 
-docker-hub:
-	FROM +build
-	EXPOSE 8000
-	CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
-	SAVE IMAGE jalletto/circle_ci_python_example:latest
+lint:
+  FROM +build
+  RUN pylint my_media/ media_organizer/
+
+test:
+  FROM +build
+  COPY . .
+  WITH DOCKER --compose docker-compose.yml
+      RUN while ! pg_isready --host=localhost --port=5432 --dbname=my_media--username=my_media; do sleep 1; done ;\
+          python manage.py test
+  END
+  SAVE ARTIFACT test_results/results.xml test_results/results.xml AS LOCAL ./test_results/results.xml
 
 
-FROM python:3
-WORKDIR 
-
-
+docker-push:
+  FROM +lint
+  ENTRYPOINT ["python", "manage.py"," runserver", "0.0.0.0:8000"]
+  SAVE IMAGE --push jalletto/circle_ci_python_example
