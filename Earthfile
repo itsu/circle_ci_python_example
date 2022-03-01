@@ -22,6 +22,6 @@ test:
 
 
 docker-push:
-  FROM +lint
+  FROM +build
   ENTRYPOINT ["python", "manage.py"," runserver", "0.0.0.0:8000"]
-  SAVE IMAGE --push jalletto/circle_ci_python_example
+  SAVE IMAGE jalletto/circle_ci_python_example
