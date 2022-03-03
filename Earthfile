@@ -13,9 +13,12 @@ lint:
 
 test:
   FROM +build
-  COPY . .
+  COPY ./docker-compose.yml .
+  RUN apt-get update
+  RUN apt-get install -y postgresql-client
   WITH DOCKER --compose docker-compose.yml
-      RUN sleep 20 && python manage.py test
+      RUN while ! pg_isready --host=localhost --port=5432 --dbname=my_media --username=example; do sleep 1; done ;\
+        python manage.py test
   END
   SAVE ARTIFACT test_results/results.xml test_results/results.xml AS LOCAL ./test_results/results.xml
 
