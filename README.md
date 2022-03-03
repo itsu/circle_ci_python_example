@@ -28,7 +28,7 @@ source venv/bin/activate
 ```bash
 createdb my_media
 psql my_media
-my_media=# CREATE ROLE example WITH LOGIN CREATEDB PASSWORD '1234';
+my_media=> CREATE ROLE example WITH LOGIN CREATEDB PASSWORD '1234';
 ```
 
 4. Run the migrations.
