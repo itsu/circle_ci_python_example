@@ -2,7 +2,7 @@
 
 version: 2.1
 jobs:
-  build:
+  test-and-lint:
     machine:
       image: ubuntu-1604:201903-01
     steps:
@@ -15,3 +15,8 @@ jobs:
       - store_test_results:
           path: test_results
       - run: earthly --ci --push +docker
+
+workflows:
+  build-and-test-workflow:
+    jobs:
+      - test-and-lint
