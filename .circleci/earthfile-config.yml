@@ -1,0 +1,22 @@
+# Change the name of this file to config.yml to use Earthly with CircleCi
+
+version: 2.1
+jobs:
+  test-and-lint:
+    machine:
+      image: ubuntu-1604:201903-01
+    steps:
+      - checkout
+      - run: docker login --username "$DOCKERHUB_USERNAME" --password "$DOCKERHUB_PASSWORD"
+      - run: "sudo /bin/sh -c 'wget https://github.com/earthly/earthly/releases/download/v0.6.8/earthly-linux-amd64 -O /usr/local/bin/earthly && chmod +x /usr/local/bin/earthly'"
+      - run: earthly --version
+      - run: earthly +lint
+      - run: earthly -P +test
+      - store_test_results:
+          path: test_results
+      - run: earthly --ci --push +docker
+
+workflows:
+  build-and-test-workflow:
+    jobs:
+      - test-and-lint

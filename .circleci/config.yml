@@ -1,22 +1,45 @@
-# Change the name of this file to config.yml to use Earthly with CircleCi
-
 version: 2.1
+orbs:
+  python: circleci/python@1.5.0
 jobs:
   test-and-lint:
-    machine:
-      image: ubuntu-1604:201903-01
+    docker:
+      - image: cimg/python:3.10.1
+      - image: cimg/postgres:14.1
+        environment:
+          POSTGRES_USER: example
     steps:
       - checkout
-      - run: docker login --username "$DOCKERHUB_USERNAME" --password "$DOCKERHUB_PASSWORD"
-      - run: "sudo /bin/sh -c 'wget https://github.com/earthly/earthly/releases/download/v0.6.8/earthly-linux-amd64 -O /usr/local/bin/earthly && chmod +x /usr/local/bin/earthly'"
-      - run: earthly --version
-      - run: earthly +lint
-      - run: earthly -P +test
+      - run:
+          name: install dependencies
+          command: pip install -r requirements.txt
+      - run:
+          name: lint
+          command: pylint my_media/ media_organizer/
+      - run:
+          name: run tests
+          command: python manage.py test
       - store_test_results:
           path: test_results
-      - run: earthly --ci --push +docker
+  build-and-push-to-dockerhub:
+    docker:
+      - image: cimg/python:3.10.1
+    steps:
+      - checkout
+      - setup_remote_docker:
+          version: 19.03.13
+          docker_layer_caching: true
+      - run: |
+          echo "$DOCKERHUB_PASSWORD" | docker login --username $DOCKERHUB_USERNAME --password-stdin
+      # build the application image
+      - run: docker build -t jalletto/circle_ci_python_example:$CIRCLE_BRANCH .
+     # deploy the image
+      - run: docker push jalletto/circle_ci_python_example:$CIRCLE_BRANCH
 
 workflows:
   build-and-test-workflow:
     jobs:
       - test-and-lint
+      - build-and-push-to-dockerhub:
+          requires:
+            - test-and-lint
