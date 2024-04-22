@@ -21,6 +21,17 @@ jobs:
           command: python manage.py test
       - store_test_results:
           path: test_results
+  build-image:
+    docker:
+      - image: cimg/python:3.10.1
+    steps:
+      - checkout
+      - setup_remote_docker:
+          version: 19.03.13
+          docker-layer_caching: true
+      - run: |
+          docker build -t btb/circle_ci_python_example:$CIRCLE_BRANCH .
+
   build-and-push-to-dockerhub:
     docker:
       - image: cimg/python:3.10.1
@@ -40,6 +51,6 @@ workflows:
   build-and-test-workflow:
     jobs:
       - test-and-lint
-      - build-and-push-to-dockerhub:
+      - build-image:
           requires:
             - test-and-lint
