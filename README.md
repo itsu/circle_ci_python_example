@@ -3,7 +3,6 @@
 ## The Project
 The idea behind this project is an app to help keep track of physical media, but really it is just an example project to have something to test and build in CircleCi.
 
-
 ## Local Setup for the Application
 
 ### Dependencies
