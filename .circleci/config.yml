@@ -27,7 +27,7 @@ jobs:
     steps:
       - checkout
       - setup_remote_docker:
-          version: 23.0.1
+          # version: 23.0.1
           docker-layer_caching: true
       - run: |
           docker build -t btb/circle_ci_python_example:$CIRCLE_BRANCH .
