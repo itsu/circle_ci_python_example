@@ -3,13 +3,14 @@
 version: 2.1
 jobs:
   test-and-lint:
-    docker:
-      - image: cimg/python:3.10.1
-      - image: cimg/postgres:14.1
-        environment:
-          POSTGRES_USER: example
+    # docker:
+    #   - image: cimg/python:3.10.1
+    #   - image: cimg/postgres:14.1
+    #     environment:
+    #       POSTGRES_USER: example
 
-    # machine:
+    machine:
+      image: ubuntu-2004:202010-01
     #   image: ubuntu-1604:201903-01
     steps:
       - checkout
