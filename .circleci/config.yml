@@ -10,7 +10,7 @@ jobs:
     #       POSTGRES_USER: example
 
     machine:
-      image: ubuntu-2204:edge
+      image: default
     #   image: ubuntu-1604:201903-01
     steps:
       - checkout
