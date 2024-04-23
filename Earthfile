@@ -1,4 +1,4 @@
-VERSION 0.8
+VERSION 0.7
 FROM python:3
 WORKDIR /circle_ci_python_example
 
