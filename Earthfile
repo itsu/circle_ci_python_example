@@ -26,3 +26,9 @@ docker:
   FROM +build
   ENTRYPOINT ["python", "manage.py"," runserver", "0.0.0.0:8000"]
   SAVE IMAGE --push jalletto/circle_ci_python_example
+
+hello:
+  FROM earthly/dind:alpine
+  WITH DOCKER --pull hello-world
+      RUN docker run hello-world
+  END
