@@ -3,13 +3,19 @@
 version: 2.1
 jobs:
   test-and-lint:
+    docker:
+      - image: cimg/python:3.10.1
+      - image: cimg/postgres:14.1
+        environment:
+          POSTGRES_USER: example
+
     # machine:
     #   image: ubuntu-1604:201903-01
     steps:
       - checkout
       # - run: docker login --username "$DOCKERHUB_USERNAME" --password "$DOCKERHUB_PASSWORD"
       - run: "sudo /bin/sh -c 'wget https://github.com/earthly/earthly/releases/download/v0.6.8/earthly-linux-amd64 -O /usr/local/bin/earthly && chmod +x /usr/local/bin/earthly'"
-      - run: earthly --version
+      - run: earthly -version
       - run: earthly +lint
       - run: earthly -P +test
       - store_test_results:
